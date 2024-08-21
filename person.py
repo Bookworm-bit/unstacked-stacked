@@ -10,3 +10,6 @@ class Person:
     
     def get_good_consistent(self):
         return self.knowledge > 0.75 and self.consistency > 0.75
+
+    def __repr__(self):
+        return f"k={self.knowledge}, c={self.consistency}"
