@@ -60,7 +60,7 @@ def trial():
 
 
 def main():
-    trials = 1
+    trials = 100
     stacked_knowledge = []
     unstacked_knowledge = []
     stacked_consistency = []
@@ -71,29 +71,27 @@ def main():
         unstacked_knowledge.append(a)
         stacked_consistency.append(d)
         unstacked_consistency.append(c)
-    
-    print(sum(stacked)/len(stacked))
-    print(sum(unstacked)/len(unstacked))
 
-    plt.plot(range(trials), stacked, label='Stacked')
-    plt.plot(range(trials), unstacked, label='Unstacked')
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
 
-    # Trendlines
-    # z_stacked = np.polyfit(range(trials), stacked, 1)
-    # p_stacked = np.poly1d(z_stacked)
-    # plt.plot(range(trials), p_stacked(range(trials)), linestyle='--', color='blue', label='Stacked Trendline')
+    # Plotting knowledge
+    ax1.plot(range(trials), stacked_knowledge, label='Stacked Knowledge')
+    ax1.plot(range(trials), unstacked_knowledge, label='Unstacked Knowledge')
+    ax1.set_xlabel('Trial')
+    ax1.set_ylabel('Average Knowledge')
+    ax1.set_title('Average Knowledge over Trials')
+    ax1.legend()
 
-    # z_unstacked = np.polyfit(range(trials), unstacked, 1)
-    # p_unstacked = np.poly1d(z_unstacked)
-    # plt.plot(range(trials), p_unstacked(range(trials)), linestyle='--', color='orange', label='Unstacked Trendline')
+    # Plotting consistency
+    ax2.plot(range(trials), stacked_consistency, label='Stacked Consistency')
+    ax2.plot(range(trials), unstacked_consistency, label='Unstacked Consistency')
+    ax2.set_xlabel('Trial')
+    ax2.set_ylabel('Average Consistency')
+    ax2.set_title('Average Consistency over Trials')
+    ax2.legend()
 
-    plt.xlabel('Trial')
-    plt.ylabel('Good Consistent People')
-    plt.title('Performance of Stacked vs Unstacked Teams')
-    plt.legend()
+    plt.tight_layout()
     plt.show()
-
-    
 
 if __name__ == "__main__":
     main()
